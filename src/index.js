@@ -34,11 +34,45 @@ console.log(sumRange(4));
 // As you peel the notes off, each one adds its number, giving the final sum.
 
 function power(b, e) {
-  if (e == 0) {
+  if (b == 0 && e == 0) {
+    return 0;
+  } else if (e == 0) {
     return 1;
   } else {
     return b * power(b, e - 1);
   }
 }
 
-console.log(power(2, 4));
+console.log(power(0, 4));
+
+// When the function power(b, e) (b=base, e=exponent) is called, it check the base case first.
+// The base case is e == 0, because when the exponent is 0, the result is always 1 except for 0^0.
+// if e > 0 runs the b * power(b, e - 1) function untill its 0.
+
+function factorial(n) {
+  if (n == 0) {
+    return 0;
+  } else if (n == 1) {
+    return 1;
+  } else {
+    return n * factorial(n - 1);
+  }
+}
+
+console.log(factorial(3));
+
+const allAreLessThanSeven = all([1, 2, 5, 6, 4], function (num) {
+  return num < 7;
+});
+
+function all(arr, cb, index = 0) {
+  if (index === arr.length) return true;
+
+  if (cb(arr[index])) {
+    return all(arr, cb, index + 1);
+  } else {
+    return false;
+  }
+}
+
+console.log(allAreLessThanSeven);
