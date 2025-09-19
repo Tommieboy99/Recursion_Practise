@@ -32,3 +32,13 @@ console.log(sumRange(4));
 // Each call is like a sticky note: “Add my number to whatever comes back next.”
 // The base case gives you the first number (1).
 // As you peel the notes off, each one adds its number, giving the final sum.
+
+function power(b, e) {
+  if (e == 0) {
+    return 1;
+  } else {
+    return b * power(b, e - 1);
+  }
+}
+
+console.log(power(2, 4));
