@@ -76,3 +76,90 @@ function all(arr, cb, index = 0) {
 }
 
 console.log(allAreLessThanSeven);
+
+function productOfArray(arr, index = 0) {
+  if (index === arr.length) return 1;
+  else {
+    return arr[index] * productOfArray(arr, index + 1);
+  }
+}
+
+console.log(productOfArray([1, 2, 3]));
+
+const nestedObject = {
+  data: {
+    info: {
+      stuff: {
+        thing: {
+          moreStuff: {
+            magicNumber: 44,
+            something: 'foo2',
+          },
+        },
+      },
+    },
+  },
+};
+
+function contains(obj, targetValue) {
+  if (typeof obj !== 'object' || obj === null) return false;
+
+  return Object.values(obj).some(
+    (value) => value === targetValue || contains(value, targetValue)
+  );
+}
+
+console.log(contains(nestedObject, 'foo2'));
+
+function totalIntegers(arr, index = 0) {
+  if (index >= arr.length) return 0; // base case: past the end of array
+
+  let total = 0;
+  let first = arr[index];
+
+  if (Array.isArray(first)) {
+    total += totalIntegers(first); // recurse into subarray
+  } else if (Number.isInteger(first)) {
+    total += 1; // count integer
+  }
+
+  return total + totalIntegers(arr, index + 1); // move to next element
+}
+
+console.log(totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]])); // 7
+
+//Write a function that sums squares of numbers in list that may contain more lists
+
+function sumNumberSquares(arr) {
+  if (arr.length === 0) return 0;
+  let total = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      total += sumNumberSquares(arr[i]);
+    } else {
+      total += arr[i] * arr[i];
+    }
+  }
+
+  return total;
+}
+
+console.log(sumNumberSquares([[1, 2], 3]));
+
+// The function should return an array containing repetitions of the number argument.
+// For instance, replicate(3, 5) should return [5, 5, 5].
+// If the times argument is negative, return an empty array.
+
+function replicate(rep, n) {
+  if (rep <= 0) return [];
+  return [n].concat(replicate(rep - 1, n));
+}
+
+console.log(replicate(3, 5));
+
+//fib iteration
+
+function fibs(n) {}
+
+console.log(fibs(5));
