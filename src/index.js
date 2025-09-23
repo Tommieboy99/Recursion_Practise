@@ -160,6 +160,72 @@ console.log(replicate(3, 5));
 
 //fib iteration
 
-function fibs(n) {}
+function fibs(n) {
+  if (n == 0) {
+    return [];
+  }
 
-console.log(fibs(5));
+  if (n == 1) {
+    return [0];
+  }
+
+  const array = [0, 1];
+
+  for (let i = 2; i < n; i++) {
+    let sum = array[i - 2] + array[i - 1];
+    array.push(sum);
+  }
+
+  return array;
+}
+
+console.log(fibs(8));
+
+function fibsRec(n) {
+  if (n == 0) return [];
+  if (n == 1) return [0];
+  if (n == 2) return [0, 1];
+
+  let prev = fibsRec(n - 1);
+  let last = prev[prev.length - 1];
+  let secondLast = prev[prev.length - 2];
+  let next = last + secondLast;
+  return prev.concat(next);
+}
+
+console.log(fibsRec(3));
+
+function mergeSort(arr) {
+  if (arr.length == 1) {
+    return arr;
+  }
+
+  if (arr.length == 0) {
+    return [];
+  }
+
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid, arr.length));
+
+  const result = [];
+  let i = 0,
+    j = 0;
+
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      result.push(left[i]);
+      i++;
+    } else {
+      result.push(right[j]);
+      j++;
+    }
+  }
+
+  while (i < left.length) result.push(left[i++]);
+  while (j < right.length) result.push(right[j++]);
+
+  return result;
+}
+
+console.log(mergeSort([7, 6, 9, 5, 4, 7]));
